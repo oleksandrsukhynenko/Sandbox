@@ -3,9 +3,8 @@ import { RegistrationFormPage } from '../pages/registration-form.page';
 import { registrationFormData } from '../data/registration-form.data';
 
 test('Fill form', async ({ page }) => {
-  await page.goto('https://demoqa.com/automation-practice-form');
-
   const registrationForm = new RegistrationFormPage(page);
+  await registrationForm.navigateByClicks();
   const data = registrationFormData;
 
   await expect(registrationForm.heading).toBeVisible();

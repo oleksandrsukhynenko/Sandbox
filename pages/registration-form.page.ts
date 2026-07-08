@@ -3,6 +3,16 @@ import { Page } from "@playwright/test";
 export class RegistrationFormPage {
 	constructor(private page: Page) {}
 
+	async navigateByURL() {
+		await this.page.goto('/automation-practice-form');
+	}
+
+	async navigateByClicks() {
+		await this.page.goto('/');
+		await this.page.getByRole('heading', { name: 'Forms' }).click();
+		await this.page.getByRole('link', { name: 'Practice Form' }).click();
+	}
+
 	get heading() {
 	    return this.page.getByRole('heading', { name: 'Practice Form' });
 	}
