@@ -1,4 +1,5 @@
 import { Page } from "@playwright/test";
+import { registrationFormData } from '../data/registration-form.data';
 
 export class RegistrationFormPage {
 	constructor(private page: Page) {}
@@ -31,6 +32,10 @@ export class RegistrationFormPage {
 
 	get mobileNumber() {
 		return this.page.getByRole('textbox', { name: 'Mobile Number' });
+	}
+
+	get gender() {
+		return this.page.getByRole('radio', { name: 'Male' }).first();
 	}
 
 	get dateOfBirthInput() {
@@ -96,5 +101,24 @@ export class RegistrationFormPage {
 		await this.page.locator('#react-select-4-input').fill(city);
 		await this.page.getByText(city, { exact: true }).click();
     }
+
+    async fillMandatoryFieldsExcept(excludedField: string) {
+
+		const data = registrationFormData;
+        const fields = {
+            firstName: async () => await this.firstName.fill(data.firstName),
+            lastName: async () => await this.lastName.fill(data.lastName),
+            gender: async () => await this.selectGender(data.gender),
+            mobileNumber: async () => await this.mobileNumber.fill(data.mobileNumber)
+        };
+
+        for (const [fieldName, fillMethod] of Object.entries(fields)) {
+
+            if (fieldName !== excludedField) {
+                await fillMethod();
+            }
+        }
+    }
+
 }
 
