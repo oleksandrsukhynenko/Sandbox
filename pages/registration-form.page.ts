@@ -67,11 +67,11 @@ export class RegistrationFormPage {
 	}
 
 	async selectGender(gender: 'Male' | 'Female' | 'Other') {
-		await this.page.getByRole('radio', { name: gender, exact: true }).check({ force: true });
+		await this.page.getByRole('radio', { name: gender, exact: true }).check();
 	}
 
 	async selectHobby(hobby: 'Sports' | 'Reading' | 'Music') {
-		await this.page.getByRole('checkbox', { name: hobby }).check({ force: true });
+		await this.page.getByRole('checkbox', { name: hobby }).check();
 	}
 
 	async setDateOfBirth(date: string) {
