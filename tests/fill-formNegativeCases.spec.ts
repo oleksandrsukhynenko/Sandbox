@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { RegistrationFormPage } from '../pages/registration-form.page';
 import { registrationFormData } from '../data/registration-form.data';
-
+import { MainNavigationMenu } from '../pages/main-navigation-menu';
 
 const mandatoryFields = [
 	{
@@ -27,7 +27,8 @@ for (const mandatoryField of mandatoryFields) {
 	test(`${mandatoryField.name} should be mandatory`, async ({ page }) => {
 
 		const registrationForm = new RegistrationFormPage(page);
-		await registrationForm.navigateByClicks();
+		const mainNavigationMenu = new MainNavigationMenu(page);
+		await mainNavigationMenu.navigateToPracticeFormByClicks();
 
 		// Fill all mandatory fields except the one being tested
 		await registrationForm.fillMandatoryFieldsExcept(
@@ -63,8 +64,9 @@ test(`Mobile Number verification`, async ({ page }) => {
 	];
 
 	const registrationForm = new RegistrationFormPage(page);
+	const mainNavigationMenu = new MainNavigationMenu(page);
 
-	await registrationForm.navigateByClicks();
+	await mainNavigationMenu.navigateToPracticeFormByClicks();
 
 	// Fill all mandatory fields except the one being tested
 	await registrationForm.fillMandatoryFieldsExcept('mobileNumber');
@@ -93,8 +95,9 @@ test(`Mobile Number verification`, async ({ page }) => {
 test(`Submit form only with required fields`, async ({ page }) => {
 
 	const registrationForm = new RegistrationFormPage(page);
+	const mainNavigationMenu = new MainNavigationMenu(page);
 
-	await registrationForm.navigateByClicks();
+	await mainNavigationMenu.navigateToPracticeFormByClicks();
 
 	// Fill all mandatory fields except the one being tested
 	await registrationForm.fillMandatoryFieldsExcept('none');

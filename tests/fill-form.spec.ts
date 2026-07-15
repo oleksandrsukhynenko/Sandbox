@@ -1,12 +1,14 @@
 import { test, expect } from '@playwright/test';
 import { RegistrationFormPage } from '../pages/registration-form.page';
 import { registrationFormData } from '../data/registration-form.data';
+import { MainNavigationMenu } from '../pages/main-navigation-menu';
 
 test('Fill form', async ({ page }) => {
   const registrationForm = new RegistrationFormPage(page);
-  await registrationForm.navigateByClicks();
+  const mainNavigationMenu = new MainNavigationMenu(page);
   const data = registrationFormData;
 
+  await mainNavigationMenu.navigateToPracticeFormByClicks(); 
   await expect(registrationForm.heading).toBeVisible();
 
   await registrationForm.firstName.fill(data.firstName);
