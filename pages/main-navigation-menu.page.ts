@@ -8,4 +8,10 @@ export class MainNavigationMenu {
 		await this.page.getByRole('link', { name: 'Practice Form' }).click();
 	}
 
+	async navigateToUserProfileByClicks() {
+		await this.page.goto('/');
+		await this.page.getByRole('heading', { name: 'Book Store Application' }).click();
+		await this.page.getByRole('link', { name: 'Profile' }).click();
+	}
+
 }

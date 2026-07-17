@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { RegistrationFormPage } from '../pages/registration-form.page';
 import { registrationFormData } from '../data/registration-form.data';
-import { MainNavigationMenu } from '../pages/main-navigation-menu';
+import { MainNavigationMenu } from '../pages/main-navigation-menu.page';
 
 test('Fill form', async ({ page }) => {
   const registrationForm = new RegistrationFormPage(page);
