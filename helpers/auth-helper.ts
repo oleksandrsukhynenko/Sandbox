@@ -14,6 +14,7 @@ export async function login(page: Page) {
 	await loginForm.passwordInput.fill(registrationFormData.password);
 
 	await loginForm.loginButton.click();
+	// Will be moved out of method
 	await expect(profileForm.logoutButton).toBeVisible();
 }
 
@@ -23,5 +24,6 @@ export async function logout(page: Page) {
 	const profileForm = new ProfileFormPage(page);
 
 	await profileForm.logoutButton.click();
+	// Will be moved out of method
 	await expect(loginForm.loginButton).toBeVisible();
 }

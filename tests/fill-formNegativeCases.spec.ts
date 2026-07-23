@@ -43,6 +43,7 @@ for (const mandatoryField of mandatoryFields) {
 			registrationForm.confirmationModal
 		).not.toBeVisible();
 
+		// Will be re-written
 		await expect(
 			registrationForm[mandatoryField.field]
 		).toHaveCSS(
@@ -82,6 +83,7 @@ test(`Mobile Number verification`, async ({ page }) => {
 			registrationForm.confirmationModal
 		).not.toBeVisible();
 
+		// Will be re-written
 		await expect(
 			registrationForm.mobileNumber
 		).toHaveCSS(

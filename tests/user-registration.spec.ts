@@ -44,6 +44,7 @@ test('User registration and login@logout', async ({ page }) => {
 	await userRegistrationForm.registerButton.click();
 	await userRegistrationForm.backToLoginButton.click();
 
+	// Assertions are inside the methods, will be moved out of method in future
 	await login(page);
 
 	await logout(page);
