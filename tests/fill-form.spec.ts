@@ -8,7 +8,7 @@ test('Fill form', async ({ page }) => {
   const mainNavigationMenu = new MainNavigationMenu(page);
   const data = registrationFormData;
 
-  await mainNavigationMenu.navigateToPracticeFormByClicks(); 
+  await mainNavigationMenu.navigateToPracticeForm(); 
   await expect(registrationForm.heading).toBeVisible();
 
   await registrationForm.firstName.fill(data.firstName);

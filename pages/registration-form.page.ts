@@ -4,10 +4,6 @@ import { registrationFormData } from '../data/registration-form.data';
 export class RegistrationFormPage {
 	constructor(private page: Page) {}
 
-	async navigateByURL() {
-		await this.page.goto('/automation-practice-form');
-	}
-
 	async navigateByClicks() {
 		await this.page.goto('/');
 		await this.page.getByRole('heading', { name: 'Forms' }).click();

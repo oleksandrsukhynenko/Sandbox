@@ -28,7 +28,7 @@ for (const mandatoryField of mandatoryFields) {
 
 		const registrationForm = new RegistrationFormPage(page);
 		const mainNavigationMenu = new MainNavigationMenu(page);
-		await mainNavigationMenu.navigateToPracticeFormByClicks();
+		await mainNavigationMenu.navigateToPracticeForm();
 
 		// Fill all mandatory fields except the one being tested
 		await registrationForm.fillMandatoryFieldsExcept(
@@ -43,13 +43,11 @@ for (const mandatoryField of mandatoryFields) {
 			registrationForm.confirmationModal
 		).not.toBeVisible();
 
-		// Will be re-written
+		// .and(page.locator(':invalid')) — narrows the locator to elements matching the native :invalid pseudo-class,
+		// which the browser applies automatically when HTML5 validation attributes (required, minlength, pattern) are violated
 		await expect(
-			registrationForm[mandatoryField.field]
-		).toHaveCSS(
-			'border-color',
-			'rgb(220, 53, 69)'
-		);
+			registrationForm[mandatoryField.field].and(page.locator(':invalid'))
+		).toBeVisible();
 
 	});
 
@@ -67,7 +65,7 @@ test(`Mobile Number verification`, async ({ page }) => {
 	const registrationForm = new RegistrationFormPage(page);
 	const mainNavigationMenu = new MainNavigationMenu(page);
 
-	await mainNavigationMenu.navigateToPracticeFormByClicks();
+	await mainNavigationMenu.navigateToPracticeForm();
 
 	// Fill all mandatory fields except the one being tested
 	await registrationForm.fillMandatoryFieldsExcept('mobileNumber');
@@ -83,13 +81,11 @@ test(`Mobile Number verification`, async ({ page }) => {
 			registrationForm.confirmationModal
 		).not.toBeVisible();
 
-		// Will be re-written
+		// .and(page.locator(':invalid')) — narrows the locator to elements matching the native :invalid pseudo-class,
+		// which the browser applies automatically when HTML5 validation attributes (required, minlength, pattern) are violated
 		await expect(
-			registrationForm.mobileNumber
-		).toHaveCSS(
-			'border-color',
-			'rgb(220, 53, 69)'
-		);
+			registrationForm.mobileNumber.and(page.locator(':invalid'))
+		).toBeVisible();
 		await registrationForm.mobileNumber.clear();
 	}
 });
@@ -99,7 +95,7 @@ test(`Submit form only with required fields`, async ({ page }) => {
 	const registrationForm = new RegistrationFormPage(page);
 	const mainNavigationMenu = new MainNavigationMenu(page);
 
-	await mainNavigationMenu.navigateToPracticeFormByClicks();
+	await mainNavigationMenu.navigateToPracticeForm();
 
 	// Fill all mandatory fields except the one being tested
 	await registrationForm.fillMandatoryFieldsExcept('none');

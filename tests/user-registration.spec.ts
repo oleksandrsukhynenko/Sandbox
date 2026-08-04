@@ -4,6 +4,7 @@ import { ProfileFormPage } from '../pages/profile-form.page';
 import { registrationFormData } from '../data/user-registration-form.data';
 import { MainNavigationMenu } from '../pages/main-navigation-menu.page';
 import { login, logout } from '../helpers/auth-helper';
+import { LoginFormPage } from '../pages/login-form.page';
 
 const data = registrationFormData;
 let userId: string;
@@ -12,8 +13,9 @@ test('User registration and login@logout', async ({ page }) => {
 	const userRegistrationForm = new UserRegistrationFormPage(page);
 	const profileForm = new ProfileFormPage(page);
 	const mainNavigationMenu = new MainNavigationMenu(page);
+	const loginForm = new LoginFormPage(page);
 
-	await mainNavigationMenu.navigateToUserProfileByClicks(); 
+	await mainNavigationMenu.navigateToUserProfile(); 
 	await profileForm.registrationLink.click();
 	await expect(userRegistrationForm.headerPageRegister).toBeVisible();
 
@@ -46,8 +48,10 @@ test('User registration and login@logout', async ({ page }) => {
 
 	// Assertions are inside the methods, will be moved out of method in future
 	await login(page);
+	await expect(profileForm.logoutButton).toBeVisible();
 
 	await logout(page);
+	await expect(loginForm.loginButton).toBeVisible();
 
 });
 
