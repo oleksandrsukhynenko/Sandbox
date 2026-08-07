@@ -1,26 +1,15 @@
 import { test, expect } from '@playwright/test';
 import { RegistrationFormPage } from '../pages/registration-form.page';
 import { registrationFormData } from '../data/registration-form.data';
-import { MainNavigationMenu } from '../pages/main-navigation-menu.page';
+import { MainNavigationMenu, Sections, Links } from '../pages/main-navigation-menu.page';
 
-const mandatoryFields = [
-	{
-		name: 'First Name',
-		field: 'firstName'
-	},
-	{
-		name: 'Last Name',
-		field: 'lastName'
-	},
-	{
-		name: 'Gender',
-		field: 'gender'
-	},
-	{
-		name: 'Mobile',
-		field: 'mobileNumber'
-	}
-] as const;
+test.describe('Mandatory fields validation', () => {
+	const mandatoryFields = [
+		{ name: 'First Name', field: 'firstName' },
+		{ name: 'Last Name', field: 'lastName' },
+		{ name: 'Gender', field: 'gender' },
+		{ name: 'Mobile', field: 'mobileNumber' }
+	] as const;
 
 for (const mandatoryField of mandatoryFields) {
 
@@ -28,7 +17,7 @@ for (const mandatoryField of mandatoryFields) {
 
 		const registrationForm = new RegistrationFormPage(page);
 		const mainNavigationMenu = new MainNavigationMenu(page);
-		await mainNavigationMenu.navigateToPracticeForm();
+		await mainNavigationMenu.navigateTo(Sections.Forms, Links.PracticeForm);
 
 		// Fill all mandatory fields except the one being tested
 		await registrationForm.fillMandatoryFieldsExcept(
@@ -65,7 +54,7 @@ test(`Mobile Number verification`, async ({ page }) => {
 	const registrationForm = new RegistrationFormPage(page);
 	const mainNavigationMenu = new MainNavigationMenu(page);
 
-	await mainNavigationMenu.navigateToPracticeForm();
+	await mainNavigationMenu.navigateTo(Sections.Forms, Links.PracticeForm);
 
 	// Fill all mandatory fields except the one being tested
 	await registrationForm.fillMandatoryFieldsExcept('mobileNumber');
@@ -95,7 +84,7 @@ test(`Submit form only with required fields`, async ({ page }) => {
 	const registrationForm = new RegistrationFormPage(page);
 	const mainNavigationMenu = new MainNavigationMenu(page);
 
-	await mainNavigationMenu.navigateToPracticeForm();
+	await mainNavigationMenu.navigateTo(Sections.Forms, Links.PracticeForm);
 
 	// Fill all mandatory fields except the one being tested
 	await registrationForm.fillMandatoryFieldsExcept('none');
@@ -104,5 +93,7 @@ test(`Submit form only with required fields`, async ({ page }) => {
 	await registrationForm.submitButton.click();
 	await expect(registrationForm.confirmationModal).toBeVisible();
  	await expect(registrationForm.confirmationModal).toHaveText('Thanks for submitting the form');
+
+});
 
 });

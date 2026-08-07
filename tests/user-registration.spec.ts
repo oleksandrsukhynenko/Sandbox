@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { UserRegistrationFormPage } from '../pages/user-registration-form.page';
 import { ProfileFormPage } from '../pages/profile-form.page';
 import { registrationFormData } from '../data/user-registration-form.data';
-import { MainNavigationMenu } from '../pages/main-navigation-menu.page';
+import { MainNavigationMenu, Sections, Links } from '../pages/main-navigation-menu.page';
 import { login, logout } from '../helpers/auth-helper';
 import { LoginFormPage } from '../pages/login-form.page';
 
@@ -15,7 +15,7 @@ test('User registration and login@logout', async ({ page }) => {
 	const mainNavigationMenu = new MainNavigationMenu(page);
 	const loginForm = new LoginFormPage(page);
 
-	await mainNavigationMenu.navigateToUserProfile(); 
+	await mainNavigationMenu.navigateTo(Sections.BookStore, Links.Profile);
 	await profileForm.registrationLink.click();
 	await expect(userRegistrationForm.headerPageRegister).toBeVisible();
 
