@@ -19,8 +19,8 @@ test('User registration and login@logout', async ({ page }) => {
 	await profileForm.registrationLink.click();
 	await expect(userRegistrationForm.headerPageRegister).toBeVisible();
 
-	// Will be redesigned in future. used to wait full page loading and re-rendering of the form.
-	await page.waitForTimeout(2000);
+	// Fill the registration form with valid data
+  	await page.waitForLoadState('networkidle');
 
 	await userRegistrationForm.firstNameInput.fill(data.firstName);
 	await userRegistrationForm.lastNameInput.fill(data.lastName);
