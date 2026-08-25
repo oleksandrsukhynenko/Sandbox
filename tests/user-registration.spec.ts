@@ -3,7 +3,7 @@ import { UserRegistrationFormPage } from '../pages/user-registration-form.page';
 import { ProfileFormPage } from '../pages/profile-form.page';
 import { registrationFormData } from '../data/user-registration-form.data';
 import { MainNavigationMenu, Sections, Links } from '../pages/main-navigation-menu.page';
-import { login, logout } from '../helpers/auth-helper';
+import { login, logout, deleteUser } from '../helpers/auth-helper';
 import { LoginFormPage } from '../pages/login-form.page';
 
 const data = registrationFormData;
@@ -55,15 +55,5 @@ test('User registration and login@logout', async ({ page }) => {
 });
 
 test.afterAll(async ({ request }) => {
-	const tokenResponse = await request.post('/Account/v1/GenerateToken', {
-		data: {
-			userName: data.userName,
-			password: data.password,
-		},
-	});
-	const {token} = await tokenResponse.json();
-
-	await request.delete(`/Account/v1/User/${userId}`, {
-		headers: { Authorization: `Bearer ${token}` },
-	});
+	await deleteUser(request, userId);
 });
