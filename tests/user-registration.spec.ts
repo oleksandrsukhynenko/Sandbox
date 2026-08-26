@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test';
 import { UserRegistrationFormPage } from '../pages/user-registration-form.page';
 import { ProfileFormPage } from '../pages/profile-form.page';
 import { registrationFormData } from '../data/user-registration-form.data';
-import { MainNavigationMenu } from '../pages/main-navigation-menu.page';
-import { login, logout } from '../helpers/auth-helper';
+import { MainNavigationMenu, Sections, Links } from '../pages/main-navigation-menu.page';
+import { login, logout, deleteUser } from '../helpers/auth-helper';
 import { LoginFormPage } from '../pages/login-form.page';
 
 const data = registrationFormData;
@@ -15,12 +15,12 @@ test('User registration and login@logout', async ({ page }) => {
 	const mainNavigationMenu = new MainNavigationMenu(page);
 	const loginForm = new LoginFormPage(page);
 
-	await mainNavigationMenu.navigateToUserProfile(); 
+	await mainNavigationMenu.navigateTo(Sections.BookStore, Links.Profile);
 	await profileForm.registrationLink.click();
 	await expect(userRegistrationForm.headerPageRegister).toBeVisible();
 
-	// Will be redesigned in future. used to wait full page loading and re-rendering of the form.
-	await page.waitForTimeout(2000);
+	// Fill the registration form with valid data
+  	await page.waitForLoadState('networkidle');
 
 	await userRegistrationForm.firstNameInput.fill(data.firstName);
 	await userRegistrationForm.lastNameInput.fill(data.lastName);
@@ -46,7 +46,6 @@ test('User registration and login@logout', async ({ page }) => {
 	await userRegistrationForm.registerButton.click();
 	await userRegistrationForm.backToLoginButton.click();
 
-	// Assertions are inside the methods, will be moved out of method in future
 	await login(page);
 	await expect(profileForm.logoutButton).toBeVisible();
 
@@ -56,15 +55,5 @@ test('User registration and login@logout', async ({ page }) => {
 });
 
 test.afterAll(async ({ request }) => {
-	const tokenResponse = await request.post('/Account/v1/GenerateToken', {
-		data: {
-			userName: data.userName,
-			password: data.password,
-		},
-	});
-	const {token} = await tokenResponse.json();
-
-	await request.delete(`/Account/v1/User/${userId}`, {
-		headers: { Authorization: `Bearer ${token}` },
-	});
+	await deleteUser(request, userId);
 });
