@@ -1,7 +1,10 @@
 import { Page } from "@playwright/test";
+import { BasePage } from './base.page';
 
-export class UserRegistrationFormPage {
-	constructor(private page: Page) {}
+export class UserRegistrationFormPage extends BasePage {
+	constructor(page: Page) {
+		super(page);
+	}
 
 	get headerPageRegister() {
 		return this.page.getByRole('heading', { name: 'Register to Book Store' });

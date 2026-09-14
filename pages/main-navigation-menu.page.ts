@@ -1,4 +1,5 @@
 import { Page } from "@playwright/test";
+import { BasePage } from './base.page';
 
 export const Sections = {
 	Forms: 'Forms',
@@ -12,8 +13,10 @@ export const Links = {
 	Profile: 'Profile',
 } as const;
 
-export class MainNavigationMenu {
-	constructor(private page: Page) {}
+export class MainNavigationMenu extends BasePage {
+	constructor(page: Page) {
+		super(page);
+	}
 
 	async navigateTo(section: string, link: string) {
 		await this.page.goto('/');

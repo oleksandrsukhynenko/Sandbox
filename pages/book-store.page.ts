@@ -1,7 +1,10 @@
 import { Page } from "@playwright/test";
+import { BasePage } from './base.page';
 
-export class BookStorePage {
-	constructor(private page: Page) {}
+export class BookStorePage extends BasePage {
+	constructor(page: Page) {
+		super(page);
+	}
 
 	get searchInput() {
 		return this.page.getByPlaceholder('Type to search');

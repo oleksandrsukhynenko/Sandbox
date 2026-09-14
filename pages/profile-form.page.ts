@@ -1,7 +1,10 @@
 import { Page } from "@playwright/test";
+import { BasePage } from './base.page';
 
-export class ProfileFormPage {
-	constructor(private page: Page) {}
+export class ProfileFormPage extends BasePage {
+	constructor(page: Page) {
+		super(page);
+	}
 
 	get registrationLink() {
 	    return this.page.getByRole('link', { name: 'register' });

@@ -1,8 +1,11 @@
 import { Page } from "@playwright/test";
 import { registrationFormData } from '../data/registration-form.data';
+import { BasePage } from './base.page';
 
-export class RegistrationFormPage {
-	constructor(private page: Page) {}
+export class RegistrationFormPage extends BasePage {
+	constructor(page: Page) {
+		super(page);
+	}
 
 	async navigateByClicks() {
 		await this.page.goto('/');
