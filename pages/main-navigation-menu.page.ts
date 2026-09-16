@@ -1,18 +1,27 @@
 import { Page } from "@playwright/test";
+import { BasePage } from './base.page';
 
-export class MainNavigationMenu {
-	constructor(private page: Page) {}
+export const Sections = {
+	Forms: 'Forms',
+	BookStore: 'Book Store Application',
+} as const;
 
-	async navigateToPracticeForm() {
-		await this.page.goto('/');
-		await this.page.getByRole('heading', { name: 'Forms' }).click();
-		await this.page.getByRole('link', { name: 'Practice Form' }).click();
+export const Links = {
+	PracticeForm: 'Practice Form',
+	BookStore: 'Book Store',
+	Login: 'Login',
+	Profile: 'Profile',
+} as const;
+
+export class MainNavigationMenu extends BasePage {
+	constructor(page: Page) {
+		super(page);
 	}
 
-	async navigateToUserProfile() {
+	async navigateTo(section: string, link: string) {
 		await this.page.goto('/');
-		await this.page.getByRole('heading', { name: 'Book Store Application' }).click();
-		await this.page.getByRole('link', { name: 'Profile' }).click();
+		await this.page.getByRole('heading', { name: section }).click();
+		await this.page.getByRole('link', { name: link, exact: true }).click();
 	}
 
 }
