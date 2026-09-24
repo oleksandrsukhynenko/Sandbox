@@ -5,11 +5,13 @@ import { MainNavigationMenu, Sections, Links } from '../pages/main-navigation-me
 
 test.describe('Practice form suite', () => {
   test('Fill form', async ({ page }) => {
+    //move consts to the describe level to avoid re-declaring them in each test step
     const registrationForm = new RegistrationFormPage(page);
     const mainNavigationMenu = new MainNavigationMenu(page);
     const data = registrationFormData;
 
     await test.step('Open practice form', async () => {
+      //move first step to the beforeEach hook to avoid re-declaring it in each test
       await mainNavigationMenu.navigateTo(Sections.Forms, Links.PracticeForm);
       await registrationForm.isLocatorVisible(registrationForm.heading, true);
     });
@@ -49,6 +51,7 @@ test.describe('Practice form suite', () => {
     });
   });
 
+  //move consts to the describe level to avoid re-declaring them in each test step
   const mandatoryFields = [
     { name: 'First Name', field: 'firstName' },
     { name: 'Last Name', field: 'lastName' },
@@ -58,6 +61,7 @@ test.describe('Practice form suite', () => {
 
   for (const mandatoryField of mandatoryFields) {
     test(`${mandatoryField.name} should be mandatory`, async ({ page }) => {
+      //move consts to the describe level to avoid re-declaring them in each test step
       const registrationForm = new RegistrationFormPage(page);
       const mainNavigationMenu = new MainNavigationMenu(page);
 
@@ -67,6 +71,7 @@ test.describe('Practice form suite', () => {
 
       await test.step('Submit form without required field', async () => {
         // Fill all mandatory fields except the one being tested
+        //describe how this method works
         await registrationForm.fillMandatoryFieldsExcept(
           mandatoryField.field
         );
@@ -77,6 +82,7 @@ test.describe('Practice form suite', () => {
         // Check that form wasn't submitted and the mandatory field is highlighted
         await registrationForm.isLocatorVisible(registrationForm.confirmationModal, false);
 
+        //remove all useless comments
         // .and(page.locator(':invalid')) narrows the locator to elements matching native validation errors.
         await registrationForm.isLocatorVisible(
           registrationForm[mandatoryField.field].and(page.locator(':invalid')),
@@ -87,6 +93,8 @@ test.describe('Practice form suite', () => {
   }
 
   test('Mobile Number verification', async ({ page }) => {
+    //move consts at the describe level
+    //why we need const data?
     const data = registrationFormData;
     const invalidMobileNumbers = [
       data.invalidMobileNumberLess10,
@@ -131,6 +139,7 @@ test.describe('Practice form suite', () => {
       await mainNavigationMenu.navigateTo(Sections.Forms, Links.PracticeForm);
 
       // Fill all mandatory fields except the one being tested
+      //for discussion: will it be easy to understand if all fields will be as parameter
       await registrationForm.fillMandatoryFieldsExcept('none');
     });
 

@@ -9,6 +9,7 @@ export async function login(page: Page) {
 
 	await page.goto('/login');
 
+	// make registrationFormData.password, registrationFormData.userName as a paramente of the method, to make it more general
 	await loginForm.userNameInput.fill(registrationFormData.userName);
 	await loginForm.passwordInput.fill(registrationFormData.password);
 
@@ -24,9 +25,11 @@ export async function logout(page: Page) {
 
 }
 
+//create a separete file for beckend actions
 export async function createUser(request: APIRequestContext): Promise<string> {
 	const response = await request.post('/Account/v1/User', {
 		data: {
+			// make registrationFormData.password, registrationFormData.userName as a paramente of the method, to make it more general
 			userName: registrationFormData.userName,
 			password: registrationFormData.password,
 		},

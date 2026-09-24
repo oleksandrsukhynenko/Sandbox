@@ -12,6 +12,7 @@ export class BasePage {
 		await expect(locator).not.toBeVisible();
 	}
 
+	//create more meanfull name for this method
 	async isLocatorText(locator: Locator, expectedText: string | RegExp | ReadonlyArray<string | RegExp>) {
 		await expect(locator).toHaveText(expectedText);
 	}

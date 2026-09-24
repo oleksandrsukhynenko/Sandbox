@@ -7,12 +7,14 @@ export class RegistrationFormPage extends BasePage {
 		super(page);
 	}
 
+	//add parameters to make this method more general // dublicated method from main-navigation-menu.page.ts
 	async navigateByClicks() {
 		await this.page.goto('/');
 		await this.page.getByRole('heading', { name: 'Forms' }).click();
 		await this.page.getByRole('link', { name: 'Practice Form' }).click();
 	}
 
+	//move locators to the separate file
 	get heading() {
 	    return this.page.getByRole('heading', { name: 'Practice Form' });
 	}
@@ -58,6 +60,7 @@ export class RegistrationFormPage extends BasePage {
 	}
 
 	async getConfirmationData(): Promise<Record<string, string>> {
+		//create locator
 		const rows = this.page.locator('.table-responsive table tbody tr');
 		const count = await rows.count();
 		const result: Record<string, string> = {};
@@ -90,21 +93,29 @@ export class RegistrationFormPage extends BasePage {
 	}
 
 	async selectState(state: string) {
+		//create locator
 		await this.page.locator('#state').click();
 		await this.page.locator('#react-select-3-input').fill(state);
 		await this.page.getByText(state, { exact: true }).click();
 	}
 
 	async selectCity(city: string) {
+		//create locator
 		await this.page.locator('#city').click();
 		await this.page.locator('#react-select-4-input').fill(city);
 		await this.page.getByText(city, { exact: true }).click();
     }
 
-    async fillMandatoryFieldsExcept(excludedField: string) {
-
+/**
+ * Fills all required registration fields except the specified one.
+ * @param excludedField - the name of the field to be excluded from filling
+ */
+    async fillMandatoryFieldsExcept(excludedField: string): Promise<void> {
+//describe how this method works
 		const data = registrationFormData;
         const fields = {
+			//why don't use:
+			//firstName: async () => await this.firstName.fill(registrationFormData.firstName),
             firstName: async () => await this.firstName.fill(data.firstName),
             lastName: async () => await this.lastName.fill(data.lastName),
             gender: async () => await this.selectGender(data.gender),

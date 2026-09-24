@@ -7,20 +7,32 @@ import { login, createUser, deleteUser } from '../helpers/auth-helper';
 import { addBookToCollection } from '../helpers/book-store-helper';
 
 test.describe('Book store suite', () => {
-	test.describe('Book collection management', () => {
+	test.describe('Book collection management', (page) => {
 		let userId: string;
+
+		const mainNavigationMenu = new MainNavigationMenu(page);
+			const profileForm = new ProfileFormPage(page);
+			const bookStorePage = new BookStorePage(page);
+			const book = bookStoreData.GitPocketGuide;
 
 		test.beforeAll(async ({ request }) => {
 			userId = await createUser(request);
 		});
+		test.beforeEach(async ({ page }) => {
+			await mainNavigationMenu.navigateTo(Sections.BookStore, Links.Login);
+				await login(page);
+				await profileForm.isLocatorVisible(profileForm.logoutButton, true);
+		});
 
 		test('Adding Book To Your Collection', async ({ page }) => {
+			//move consts to the describe level to avoid re-declaring them in each test step
 			const mainNavigationMenu = new MainNavigationMenu(page);
 			const profileForm = new ProfileFormPage(page);
 			const bookStorePage = new BookStorePage(page);
 			const book = bookStoreData.GitPocketGuide;
 
 			await test.step('Login to book store', async () => {
+				//move to the beforeEach section
 				await mainNavigationMenu.navigateTo(Sections.BookStore, Links.Login);
 				await login(page);
 				await profileForm.isLocatorVisible(profileForm.logoutButton, true);
@@ -47,6 +59,7 @@ test.describe('Book store suite', () => {
 		});
 	});
 
+	//test.sedcribe block should be one per test
 	test.describe('Book deletion management', () => {
 		let userId: string;
 

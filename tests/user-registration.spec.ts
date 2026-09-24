@@ -11,6 +11,7 @@ let userId: string;
 
 test.describe('User account flow', () => {
 	test('User registration and login@logout', async ({ page }) => {
+		//move consts to the describe level to avoid re-declaring them in each test step
 		const userRegistrationForm = new UserRegistrationFormPage(page);
 		const profileForm = new ProfileFormPage(page);
 		const mainNavigationMenu = new MainNavigationMenu(page);
