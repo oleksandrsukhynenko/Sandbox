@@ -1,5 +1,4 @@
-import { Page } from "@playwright/test";
-import { BasePage } from './base.page';
+import { MainNavigationMenuActions } from './main-navigation-menu.actions';
 
 export const Sections = {
 	Forms: 'Forms',
@@ -13,15 +12,4 @@ export const Links = {
 	Profile: 'Profile',
 } as const;
 
-export class MainNavigationMenu extends BasePage {
-	constructor(page: Page) {
-		super(page);
-	}
-
-	async navigateTo(section: string, link: string) {
-		await this.page.goto('/');
-		await this.page.getByRole('heading', { name: section }).click();
-		await this.page.getByRole('link', { name: link, exact: true }).click();
-	}
-
-}
+export class MainNavigationMenu extends MainNavigationMenuActions {}
