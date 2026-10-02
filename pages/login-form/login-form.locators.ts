@@ -1,8 +1,6 @@
-import { Page } from "@playwright/test";
+import { BasePage } from '../base.page';
 
-export class LoginFormPage {
-	constructor(private page: Page) {}
-
+export class LoginFormLocators extends BasePage {
 	get userNameInput() {
 		return this.page.getByRole('textbox', { name: 'UserName' });
 	}

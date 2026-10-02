@@ -1,8 +1,6 @@
-import { Page } from "@playwright/test";
+import { BasePage } from '../base.page';
 
-export class UserRegistrationFormPage {
-	constructor(private page: Page) {}
-
+export class UserRegistrationFormLocators extends BasePage {
 	get headerPageRegister() {
 		return this.page.getByRole('heading', { name: 'Register to Book Store' });
 	}
@@ -10,6 +8,7 @@ export class UserRegistrationFormPage {
 	get firstNameInput() {
 		return this.page.getByRole('textbox', { name: 'First Name' });
 	}
+
 	get lastNameInput() {
 		return this.page.getByRole('textbox', { name: 'Last Name' });
 	}
