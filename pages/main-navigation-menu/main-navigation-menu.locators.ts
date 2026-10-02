@@ -1,4 +1,4 @@
-import { BasePage } from './base.page';
+import { BasePage } from '../base.page';
 
 export class MainNavigationMenuLocators extends BasePage {
 	sectionHeading(section: string) {

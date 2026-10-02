@@ -1,4 +1,4 @@
-import { registrationFormData } from '../data/registration-form.data';
+import { registrationFormData } from '../../data/registration-form.data';
 import { RegistrationFormLocators } from './registration-form.locators';
 
 export class RegistrationFormActions extends RegistrationFormLocators {

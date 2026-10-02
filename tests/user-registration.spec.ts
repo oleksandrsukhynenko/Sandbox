@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { UserRegistrationFormPage } from '../pages/user-registration-form.page';
-import { ProfileFormPage } from '../pages/profile-form.page';
+import { UserRegistrationFormPage } from '../pages/user-registration-form/user-registration-form.page';
+import { ProfileFormPage } from '../pages/profile-form/profile-form.page';
 import { registrationFormData } from '../data/user-registration-form.data';
-import { MainNavigationMenu, Sections, Links } from '../pages/main-navigation-menu.page';
+import { MainNavigationMenu, Sections, Links } from '../pages/main-navigation-menu/main-navigation-menu.page';
 import { login, logout } from '../helpers/ui-helper';
 import { deleteUser } from '../helpers/api-helper';
-import { LoginFormPage } from '../pages/login-form.page';
+import { LoginFormPage } from '../pages/login-form/login-form.page';
 
 test.describe('User account flow', () => {
 	let userId: string;
