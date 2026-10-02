@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
-import { ProfileFormPage } from '../pages/profile-form.page';
+import { ProfileFormPage } from '../pages/profile-form/profile-form.page';
 import { bookStoreData } from '../data/book-store.data';
-import { MainNavigationMenu, Sections, Links } from '../pages/main-navigation-menu.page';
+import { MainNavigationMenu, Sections, Links } from '../pages/main-navigation-menu/main-navigation-menu.page';
 import { login } from '../helpers/ui-helper';
 import { createUser, deleteUser, addBookToCollection } from '../helpers/api-helper';
 

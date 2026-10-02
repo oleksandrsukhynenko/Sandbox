@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { RegistrationFormPage } from '../pages/registration-form.page';
+import { RegistrationFormPage } from '../pages/registration-form/registration-form.page';
 import { registrationFormData } from '../data/registration-form.data';
-import { MainNavigationMenu, Sections, Links } from '../pages/main-navigation-menu.page';
+import { MainNavigationMenu, Sections, Links } from '../pages/main-navigation-menu/main-navigation-menu.page';
 
 test.describe('Practice form suite', () => {
   const mandatoryFields = [

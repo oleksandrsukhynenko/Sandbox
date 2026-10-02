@@ -1,4 +1,4 @@
-import { BasePage } from './base.page';
+import { BasePage } from '../base.page';
 
 export class RegistrationFormLocators extends BasePage {
 	get heading() {

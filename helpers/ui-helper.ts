@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import { registrationFormData } from '../data/user-registration-form.data';
-import { ProfileFormPage } from '../pages/profile-form.page';
-import { LoginFormPage } from '../pages/login-form.page';
+import { ProfileFormPage } from '../pages/profile-form/profile-form.page';
+import { LoginFormPage } from '../pages/login-form/login-form.page';
 
 /**
  * Logs in through the login form.

@@ -1,4 +1,4 @@
-import { BasePage } from './base.page';
+import { BasePage } from '../base.page';
 
 export class LoginFormLocators extends BasePage {
 	get userNameInput() {
