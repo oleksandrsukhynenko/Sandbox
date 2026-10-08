@@ -77,7 +77,6 @@ test.describe('Practice form suite', () => {
       await test.step('Verify validation for required field', async () => {
         await registrationForm.expectLocatorToBeVisible(registrationForm.confirmationModal, false);
 
-        // .and(page.locator(':invalid')) narrows the locator to elements matching native validation errors.
         await registrationForm.expectLocatorToBeVisible(
           registrationForm[mandatoryField.field].and(page.locator(':invalid')),
           true
